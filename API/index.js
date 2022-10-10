@@ -2,16 +2,15 @@ const express = require("express");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-// const path = require("path");
 const compression = require("compression");
 
 // ROUTES
 const usersRoutes = require("./routes/users.js");
 
-require("dotenv").config();
-
 // port de l'API
 const port = 8000;
+
+require("dotenv").config();
 
 // connexion entre l'API et la base de donnée
 mongoose
@@ -19,7 +18,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Connecté à MongoDB ! 🌿"))
+  .then(() => console.log("Connecté à MongoDB !"))
   .catch((err) => console.log(err));
 
 const app = express();
@@ -29,6 +28,7 @@ const app = express();
 app.use(helmet());
 
 
+// CORS / type de requête autorisé
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+    "GET, POST, PUT, DELETE",
   );
   res.setHeader(
     "Cross-Origin-Resource-Policy",
@@ -46,14 +46,15 @@ app.use((req, res, next) => {
   next();
 });
 
+// bodyParser donne l'accés à req.body c'est-à-dire le body des requêtes
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// compression réduit la taille et la vitesse de la requête donc augmente également la vitesse de l'application
 app.use(compression());
 
-// app.use("/public", express.static(path.join(__dirname, "/images")));
 
-// defini les routes que doit prendre une requête selon l'url
+// défini la route que doit prendre une requête selon l'URL
 app.use("/api/users", usersRoutes);
 
 app.listen(port, () => console.log("📡 LISTENING ON PORT " + port));

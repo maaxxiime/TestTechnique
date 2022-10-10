@@ -1,0 +1,14 @@
+Une fois avoir cloné le repository, se rendre dans le terminal de commande intégré à Visual Studio Code,
+effectuer la commande "npm install" dans le dossier "API" et faire la même chose dans le dossier "react-app".
+
+
+Lien de la collection Postman
+https://documenter.getpostman.com/view/20347212/2s83ziQ4v2#31304e86-16f1-4385-bc11-c640b33e253a
+
+
+
+Pour tester l'API, il manque le fichier .env qui n'est pas accessible dans le repository vu qu'il s'agit de données sensibles.
+Il contient seulement deux paramètres :
+
+DB_ACCESS = " lien de la collection de mongoDB "
+TOKEN_KEY = " Une clé de token créé sur un site spécialisé "

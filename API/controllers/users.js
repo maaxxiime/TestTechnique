@@ -4,26 +4,38 @@ const jwt = require("jsonwebtoken");
 
 exports.signup = (req, res, next) => {
   bcrypt
+
     // hash le mot de passe qui passe dans la requête axios
     .hash(req.body.password, 10)
     .then((hash) => {
-      // enregistre newuser et passe admin à false
-      const newuser = new User({
+      // créer la variable newUser et stock les données dedans
+      const newUser = new User({
+        pseudo: req.body.pseudo,
+        nom: req.body.nom,
+        prenom: req.body.prenom,
         email: req.body.email,
         password: hash,
-        identifiant: req.body.identifiant,
-        admin: false,
+        telephone: req.body.telephone,
+        adresse: req.body.adresse,
+        complement: req.body.complement,
+        codepostal: req.body.codepostal,
+        ville: req.body.ville,
       });
-      // sauvegarde newuser
-      newuser
+
+      // sauvegarde newUser
+      newUser
         .save()
-        .then(() => res.status(201).json({ message: "User created ! 👌" }))
-        .catch((err) => res.status(401).json({ message : "impossible de créer le compte", error : err }));
+        .then(() => res.status(201).json({ message: "Utilisateur créé" }))
+        .catch((err) =>
+          res
+            .status(401)
+            .json({ message: "impossible de créer le compte", error: err })
+        );
     })
     .catch((err) => res.status(500).json({ err }));
 };
 
-// utilisé sur postman pour des tests
+// utilisé sur Postman pour des tests
 exports.read_all = (req, res, next) => {
   User.find()
     .then((u) => res.status(200).json({ message: "voici vos users", users: u }))
@@ -31,7 +43,7 @@ exports.read_all = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  // cherche un user dont l'email de la requette correspond à un email dans la base de donnée
+  // cherche un user dont l'email de la requête correspond à un email dans la base de donnée
   User.findOne({ email: req.body.email })
     .then((user) => {
       bcrypt
@@ -40,7 +52,7 @@ exports.login = (req, res, next) => {
         .then((correspond) => {
           // si il ne corresponde pas
           if (!correspond) {
-            res.status(401).json({ message: "mdp incorrect" });
+            res.status(401).json({ message: "mot de passe incorrect" });
           } else {
             // si il corresponde assign un token a l'user
             const token = jwt.sign(
@@ -50,10 +62,17 @@ exports.login = (req, res, next) => {
             );
             res.status(200).json({
               message: "connexion réussi",
-              user: user.email,
+              pseudo: user.pseudo,
+              nom: user.nom,
+              prenom: user.prenom,
+              email: user.email,
+              telephone: user.telephone,
+              adresse: user.adresse,
+              complement: user.complement,
+              codepostal: user.codepostal,
+              ville: user.ville,
               userId: user.id,
               token: token,
-              admin: user.admin,
             });
           }
         })
@@ -77,8 +96,8 @@ exports.delete = (req, res, next) => {
 
   // compare l'id du token et l'id de la requête axios
   if (userID === TargetId) {
+    // si les deux correspondent, supprime l'user
     User.findByIdAndDelete(TargetId)
-      // si les deux correspondent, supprime l'user
       .then((user) => {
         res.status(200).json({ message: `utilisateur ${user.email} supprimé` });
       })
@@ -102,45 +121,35 @@ exports.update = (req, res, next) => {
 
   // compare l'id du token et l'id de la requette axios
   if (userID === targetID) {
-    User.findById(userID).then((user) => {
-      // compare le mot de passe actuel rentré dans la requette et le mot de passe de la base de donnée
-      bcrypt.compare(req.body.oldpassword, user.password).then((valid) => {
-        // si les mot de passe ne corresponde pas
-        if (!valid) {
-          res
-            .status(401)
-            .json({ message: "le mot de passe ne correspond pas" });
-        }
-        bcrypt
-          // si c'est bon, hash le nouveau mot de passe
-          .hash(req.body.password, 10)
-          .then((hash) => {
-            const newEmail = req.body.email;
-            // enregistre le nouveau user
-            const updateUser = {
-              email: newEmail,
-              password: hash,
-            };
 
-            user
-              // fait la modification
-              .updateOne(updateUser)
-              .then(() =>
-                res.status(200).json({
-                  message: `votre email et/ou mot de passe ont était modififié par ${updateUser.email}`,
-                })
-              )
-              .catch((err) =>
-                res
-                  .status(404)
-                  .json({ message: "utilisateur introuvable", error: err })
-              );
-          })
+    User.findById(userID)
+
+      .then((user) => {
+      // créer la variable updateUser et stock les données dedans
+        const updateUser = {
+          email: req.body.email,
+          adresse: req.body.adresse,
+          complement: req.body.complement,
+          codepostal: req.body.codepostal,
+          ville: req.body.ville,
+        };
+
+          // fait la modification
+          user.updateOne(updateUser)
+          .then(() =>
+            res.status(200).json({
+              message: "Votre compte a été modifié avec succés",
+            })
+          )
           .catch((err) =>
-            res.status(500).json({ message: "bcrypt error", error: err })
+            res
+              .status(404)
+              .json({ message: "utilisateur introuvable", error: err })
           );
-      });
-    });
+      })
+      .catch((err) =>
+        res.status(500).json({ error: err })
+      );
   } else {
     res.status(403).json({
       error: "Vous n'avez pas les droit pour modifier cet utilisateur",

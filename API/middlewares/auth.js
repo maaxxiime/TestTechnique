@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 
 const auth = (req, res, next) => {
     try {
-        // décode le token
+        // récupère le token puis le décode via une méthode jwt
         const token = req.headers.authorization.split(" ")[1];
         const decodedToken = jwt.verify(token, process.env.TOKEN_KEY);
         
