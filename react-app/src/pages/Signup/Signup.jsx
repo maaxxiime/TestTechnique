@@ -42,17 +42,23 @@ export default function Signup() {
     }
   }
 
-  function send() {
-    let pseudo = document.getElementById("pseudo").value;
-    let nom = document.getElementById("nom").value;
-    let prenom = document.getElementById("prenom").value;
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    let telephone = document.getElementById("telephone").value;
-    let adresse = document.getElementById("adresse").value;
-    let complement = document.getElementById("complement").value;
-    let codePostal = document.getElementById("codepostal").value;
-    let ville = document.getElementById("ville").value;
+  function send(e) {
+    e.preventDefault();
+
+    let pseudo = document.getElementById("pseudo");
+    let nom = document.getElementById("nom");
+    let prenom = document.getElementById("prenom");
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+    let telephone = document.getElementById("telephone");
+    let adresse = document.getElementById("adresse");
+    let complement = document.getElementById("complement");
+    let codePostal = document.getElementById("codepostal");
+    let ville = document.getElementById("ville");
+
+    if (complement.value === "") {
+      complement.value = "empty";
+    }
 
     const data = {
       pseudo: pseudo.value,
@@ -67,23 +73,19 @@ export default function Signup() {
       ville: ville.value,
     };
 
-    const config = {
-      headers: {
-        "Content-type": "application/x-www-form-urlencoded",
-      },
-    };
-
     axios
-      .post(apiurl + "/users/signup", qs.stringify(data), config)
+      .post(apiurl + "/users/signup", qs.stringify(data))
       .then((res) => {
         setRes(res.data.message);
+        console.log(res.data);
 
-        // setTimeout(() => {
-        //   window.location.assign("/login");
-        // }, 1500);
+        setTimeout(() => {
+          window.location.assign("/login");
+        }, 1500);
       })
       .catch((err) => {
         setRes(err.message);
+        console.log(err);
       });
   }
 
@@ -104,7 +106,7 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
-        <label htmlFor="prenom"> Nom : </label>
+        <label htmlFor="nom"> Nom : </label>
         <input
           id="nom"
           type="text"
@@ -143,10 +145,10 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
-                <label htmlFor="telephone"> Telephone: </label>
+        <label htmlFor="telephone"> Telephone: </label>
         <input
           id="telephone"
-          type="text"
+          type="number"
           placeholder="0640010101"
           name="telephone"
           required={true}
@@ -167,12 +169,13 @@ export default function Signup() {
           type="text"
           placeholder="Batiment B"
           name="complement"
+          required={false}
           onChange={() => checkValues()}
         />
         <label htmlFor="codepostal"> Code postal : </label>
         <input
           id="codepostal"
-          type="text"
+          type="number"
           placeholder="41000"
           name="codepostal"
           required={true}
@@ -190,7 +193,10 @@ export default function Signup() {
         />
 
         <div>
-          <button disabled={!Filled} onClick={() => send()}> Créer le compte</button>
+          <button disabled={!Filled} onClick={(e) => send(e)}>
+            {" "}
+            Créer le compte
+          </button>
         </div>
 
         {Res && (

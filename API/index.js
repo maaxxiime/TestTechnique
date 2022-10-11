@@ -1,6 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const compression = require("compression");
 
@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE",
+    "GET, POST, PUT, DELETE, PATCH",
   );
   res.setHeader(
     "Cross-Origin-Resource-Policy",
@@ -47,8 +47,8 @@ app.use((req, res, next) => {
 });
 
 // bodyParser donne l'accés à req.body c'est-à-dire le body des requêtes
-app.use(bodyParser.json({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 // compression réduit la taille et la vitesse de la requête donc augmente également la vitesse de l'application
 app.use(compression());

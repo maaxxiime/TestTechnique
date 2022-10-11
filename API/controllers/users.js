@@ -137,9 +137,20 @@ exports.update = (req, res, next) => {
           // fait la modification
           user.updateOne(updateUser)
           .then(() =>
-            res.status(200).json({
-              message: "Votre compte a été modifié avec succés",
-            })
+          res.status(200).json({
+            message: "Votre compte est modifié",
+            pseudo: user.pseudo,
+            nom: user.nom,
+            prenom: user.prenom,
+            email: updateUser.email,
+            telephone: user.telephone,
+            adresse: updateUser.adresse,
+            complement: updateUser.complement,
+            codepostal: updateUser.codepostal,
+            ville: updateUser.ville,
+            userId: user.id,
+            token: token,
+          })
           )
           .catch((err) =>
             res

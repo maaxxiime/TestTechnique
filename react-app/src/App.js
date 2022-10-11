@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import Home from './pages/Home/Home'
@@ -7,6 +8,7 @@ import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import Compte from './pages/Compte/Compte'
 import Error from './pages/Error/Error'
+
 
 function App() {
   return (
