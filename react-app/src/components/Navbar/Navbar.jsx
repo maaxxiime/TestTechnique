@@ -60,6 +60,27 @@ export default function Navbar() {
   const user = window.localStorage.getItem("user");
   const userJson = JSON.parse(user);
 
+  let url = document.location.href;
+  let urlReplace = url.replace(/\/$/, "");
+  let trueUrl = urlReplace.substring(urlReplace.lastIndexOf("/") + 1);
+
+  
+  let accueil = document.getElementById('accueil');
+  let compte = document.getElementById('compte');
+  let accueilTwo = document.getElementById('accueilTwo');
+  let login = document.getElementById('login');
+  let signup = document.getElementById('signup');
+  console.log(trueUrl)
+  
+  if(trueUrl == "localhost:3000") {
+    accueil.classList.add("active");
+  } else if (trueUrl == "compte") {
+    compte.classList.add("active")
+  }
+
+
+
+
   function deconnexion() {
     window.localStorage.clear();
     window.location.assign("/");
@@ -69,10 +90,10 @@ export default function Navbar() {
     <Nav>
       <div>
       <h2>Deadline BTP</h2>
-      <a href="/"> Accueil</a>
+      <a id="accueil" href="/"> Accueil</a>
       </div>
       <div>
-      <a href="/compte"> Mon compte</a>
+      <a id="compte" href="/compte"> Mon compte</a>
       <button onClick={() => deconnexion()}> Déconnexion</button>
       </div>
     </Nav>
@@ -80,11 +101,11 @@ export default function Navbar() {
     <Nav>
       <div>
       <h2>Deadline BTP</h2>
-      <a href="/"> Accueil</a>
+      <a id="accueilTwo" href="/"> Accueil</a>
       </div>
       <div>
-      <a href="/login"> Connexion</a>
-      <a href="/signup"> Créer un compte</a>
+      <a id="login" href="/login"> Connexion</a>
+      <a id="signup" href="/signup"> Créer un compte</a>
       </div>
     </Nav>
   );
