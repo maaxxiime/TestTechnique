@@ -2,12 +2,87 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import qs from "qs";
-import { apiurl } from "../../variable/variable";
+import { apiurl, colors } from "../../variable/variable";
 // import { colors } from "../../variable/variable";
 
-const MainSection = styled.section``;
-const MainTitle = styled.h1``;
-const Form = styled.form``;
+const MainSection = styled.section`
+display: flex;
+flex-direction: column;
+align-items: center;
+`;
+const MainTitle = styled.h1`
+margin-top: 2rem;
+`;
+const Form = styled.form`
+display: flex;
+flex-direction: column;
+
+input {
+  max-width: 350px;
+  height: 30px;
+  font-size: 1rem;
+  border: 1px solid ${colors["border-input"]};
+  background-color: #effbff;
+  color: ${colors["font-input"]};
+  border-radius: 0.25rem;
+}
+input:focus {
+  background-color: #dff7ff;
+  outline:2px solid ${colors["outline-input"]} ;
+  color: ${colors["font-input"]};
+  border-radius: 0.25rem;
+  border: 1px solid ${colors["outline-input"]};
+}
+
+input::placeholder{
+  color: ${colors["font-input"]};
+}
+
+label {
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+span {
+  color: #ff0000;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+h3 {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.enable {
+  background-color: #40c6ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.enable:hover {
+  background-color: #00b3ff;
+}
+.disabled{
+  border: none;
+  background-color: #e1e1e1;
+  color: #6b6b6b;
+}
+
+.btn {
+  width: 120px;
+  height: 40px;
+  border-radius: 0.50rem;
+}
+`;
 
 export default function Signup() {
   const [Filled, setFilled] = useState(false);
@@ -90,14 +165,14 @@ export default function Signup() {
   }
 
   return (
-    <MainSection id="main">
+    <MainSection>
       <MainTitle>
-        {" "}
-        Créer votre compte dès maintenant pour pouvoir profiter du site à 100% !{" "}
+        Bienvenue sur la page de création de compte
       </MainTitle>
 
       <Form>
-        <label htmlFor="pseudo"> Pseudo : </label>
+        <h3>Les champs marqué par <span>*</span> sont obligatoire</h3>
+        <label htmlFor="pseudo"> Pseudo <span>*</span> </label>
         <input
           id="pseudo"
           type="text"
@@ -106,27 +181,27 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
-        <label htmlFor="nom"> Nom : </label>
+        <label htmlFor="nom"> Nom <span>*</span> </label>
         <input
           id="nom"
           type="text"
-          placeholder="Maxime"
+          placeholder="Durand"
           name="nom"
           required={true}
           onChange={() => checkValues()}
         />
 
-        <label htmlFor="prenom"> Prenom : </label>
+        <label htmlFor="prenom"> Prenom <span>*</span> </label>
         <input
           id="prenom"
           type="text"
-          placeholder="Potter"
+          placeholder="Pierre"
           name="prenom"
           required={true}
           onChange={() => checkValues()}
         />
 
-        <label htmlFor="email"> Email : </label>
+        <label htmlFor="email"> Email <span>*</span> </label>
         <input
           id="email"
           type="email"
@@ -136,25 +211,25 @@ export default function Signup() {
           onChange={() => checkValues()}
         />
 
-        <label htmlFor="password"> Mot de passe : </label>
+        <label htmlFor="password"> Mot de passe <span>*</span> </label>
         <input
           id="password"
           type="password"
-          placeholder="monSuperMdp@54"
+          placeholder="Mot de passe"
           name="password"
           required={true}
           onChange={() => checkValues()}
         />
-        <label htmlFor="telephone"> Telephone: </label>
+        <label htmlFor="telephone"> Telephone <span>*</span> </label>
         <input
           id="telephone"
           type="number"
-          placeholder="0640010101"
+          placeholder="0640951701"
           name="telephone"
           required={true}
           onChange={() => checkValues()}
         />
-        <label htmlFor="adresse"> Adresse: </label>
+        <label htmlFor="adresse"> Adresse <span>*</span> </label>
         <input
           id="adresse"
           type="text"
@@ -163,7 +238,7 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
-        <label htmlFor="complement"> Complement d'adresse : </label>
+        <label htmlFor="complement"> Complement d'adresse:</label>
         <input
           id="complement"
           type="text"
@@ -172,7 +247,7 @@ export default function Signup() {
           required={false}
           onChange={() => checkValues()}
         />
-        <label htmlFor="codepostal"> Code postal : </label>
+        <label htmlFor="codepostal"> Code postal <span>*</span> </label>
         <input
           id="codepostal"
           type="number"
@@ -182,7 +257,7 @@ export default function Signup() {
           onChange={() => checkValues()}
         />
 
-        <label htmlFor="ville"> Ville : </label>
+        <label htmlFor="ville"> Ville <span>*</span> </label>
         <input
           id="ville"
           type="text"
@@ -193,15 +268,15 @@ export default function Signup() {
         />
 
         <div>
-          <button disabled={!Filled} onClick={(e) => send(e)}>
-            {" "}
+          <button disabled={!Filled} className={!Filled ? "disabled btn" : "enable btn"} onClick={(e) => send(e)}>
             Créer le compte
           </button>
         </div>
 
         {Res && (
           <div className="res">
-            <p>{Res}</p>
+            <p>Erreur</p>
+            <p>Vérifier bien que :</p>
           </div>
         )}
       </Form>
