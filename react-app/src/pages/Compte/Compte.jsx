@@ -5,83 +5,153 @@ import qs from "qs";
 import { apiurl } from "../../variable/variable";
 import { colors } from "../../variable/variable";
 
+const MainSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    margin-top: 5%;
+    text-align: center;
+  }
+`;
+const DivInfos = styled.div`
+  margin-top: 2%;
+  width: 90%;
+
+  .row {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .container {
+    background-color: #e4f3ff;
+    width: 100%;
+    border-radius: 0.3rem;
+    margin: 1rem;
+    box-shadow: rgba(0, 153, 255, 0.2) 0px 2px 8px 0px;
+    text-align: center;
+    max-width: 400px;
+  }
+  .container h5 {
+    margin: 6px 0;
+  }
+
+  .container p {
+  }
+`;
+
+const DivButtonModifie = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    margin-top: 3%;
+    background-color: #40c6ff;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 40px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #00b3ff;
+    transition: 0.2s;
+  }
+`;
+
 const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  position: relative;
-`;
 
-const DivInfos = styled.div`
-  margin: 2rem 0;
-
-  & h1 {
-    margin: 1rem 0;
-  }
-
-  & h2 {
-    margin: 0 0 1rem 0;
-  }
-
-  & div {
-    border: 2px solid #a89c9c;
-    width: calc(100% + 150px);
-    height: 30px;
-    margin: 5px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  h2 {
+    margin-top: 3%;
   }
 `;
+
 const DivModifie = styled.div`
-
-
-  & input {
-    margin: 1rem 0 2rem 0;
-  }
-
-  & .myBtn {
-    margin: 1rem 1rem;
-  }
-
-  & .btn-delet {
-    border: none;
-    background-color: ${colors.background_black};
-    color: ${colors.txt_white};
-    width: 11rem;
-    height: 1.9rem;
-    border-radius: 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  & .btn-delet:hover {
-    background-color: ${colors.btn_redhover};
-  }
-  & form {
-    @media all and (min-width: 480px) and (max-width: 767px) {
-      display: flex;
-      flex-direction: column;
-      width: 90%;
-      align-items: center;
-    }
-    @media all and (max-width: 479px) {
-      display: flex;
-      flex-direction: column;
-      width: 90%;
-      align-items: center;
-    }
-  }
-  @media all and (min-width: 480px) and (max-width: 767px) {
-  }
-  @media all and (max-width: 479px) {
+  form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+
+    button {
+      margin-top: 6%;
+      background-color: #3cff00;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #27e700;
+      transition: 0.2s;
+    }
+    div {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  input {
+    max-width: 350px;
+    height: 30px;
+    font-size: 1rem;
+    border: 1px solid ${colors["border-input"]};
+    background-color: #effbff;
+    color: ${colors["font-input"]};
+    border-radius: 0.25rem;
+  }
+  input:focus {
+    background-color: #dff7ff;
+    outline: 2px solid ${colors["outline-input"]};
+    color: ${colors["font-input"]};
+    border-radius: 0.25rem;
+    border: 1px solid ${colors["outline-input"]};
+  }
+
+  input::placeholder {
+    color: ${colors["font-input"]};
+  }
+
+  label {
+    margin-top: 0.8rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .btn-delete {
+    margin-top: 6%;
+    background-color: #ff0000;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  .btn-back {
+    margin-top: 6%;
+    background-color: #40c6ff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  .btn-delete:hover {
+    background-color: #e30000;
+    transition: 0.2s;
+  }
+  .btn-back:hover {
+    background-color: #00b3ff;
+    transition: 0.2s;
   }
 `;
-
-
 
 export default function Compte() {
   const user = window.localStorage.getItem("user");
@@ -184,102 +254,129 @@ export default function Compte() {
   }
 
   return Put ? (
-    <DivModifie>
-      <h2> Modifier mon compte </h2>
-      <h1>Je modifie</h1>
-
-      <form>
-        <label htmlFor="email"> Email : </label>
-        <input
-          id="email"
-          type="email"
-          placeholder="monEmail@gmail.com"
-          name="email"
-          required={true}
-        />
-        <label htmlFor="adresse"> Adresse: </label>
-        <input
-          id="adresse"
-          type="text"
-          placeholder="30 rue du btp"
-          name="adresse"
-          required={true}
-        />
-        <label htmlFor="complement"> Complement d'adresse : </label>
-        <input
-          id="complement"
-          type="text"
-          placeholder="Batiment B"
-          name="complement"
-          required={false}
-        />
-        <label htmlFor="codepostal"> Code postal : </label>
-        <input
-          id="codepostal"
-          type="number"
-          placeholder="41000"
-          name="codepostal"
-          required={true}
-        />
-
-        <label htmlFor="ville"> Ville : </label>
-        <input
-          id="ville"
-          type="text"
-          placeholder="Paris"
-          name="ville"
-          required={true}
-        />
-
-        <button onClick={(e) => modifie(e)}> modifier mon compte </button>
-      </form>
-        <button onClick={() => delet()}> Supprimer mon compte </button>
-      <button onClick={() => NoPut()}> Annuler les modifications </button>
-    </DivModifie>
-  ) : (
     <Section>
-      <DivInfos>
-        <h1> Mon compte </h1>
-        <h2> Mes informations </h2>
+      <h2> Modifier mon compte </h2>
 
-        <p>pseudo :</p>
-        <div>
-          <p> {pseudo} </p>
+      <DivModifie>
+        <form>
+          <label htmlFor="email"> Email : </label>
+          <input
+            id="email"
+            type="email"
+            placeholder="monEmail@gmail.com"
+            name="email"
+            required={true}
+          />
+          <label htmlFor="adresse"> Adresse: </label>
+          <input
+            id="adresse"
+            type="text"
+            placeholder="30 rue du btp"
+            name="adresse"
+            required={true}
+          />
+          <label htmlFor="complement"> Complément d'adresse : </label>
+          <input
+            id="complement"
+            type="text"
+            placeholder="Batiment B"
+            name="complement"
+            required={false}
+          />
+          <label htmlFor="codepostal"> Code postal : </label>
+          <input
+            id="codepostal"
+            type="number"
+            placeholder="41000"
+            name="codepostal"
+            required={true}
+          />
+
+          <label htmlFor="ville"> Ville : </label>
+          <input
+            id="ville"
+            type="text"
+            placeholder="Paris"
+            name="ville"
+            required={true}
+          />
+          <div>
+            <button onClick={(e) => modifie(e)}> modifier mon compte </button>
+          </div>
+        </form>
+        <button className="btn-back" onClick={() => NoPut()}>
+          {" "}
+          Annuler les modifications{" "}
+        </button>
+        <button className="btn-delete" onClick={() => delet()}>
+          Supprimer mon compte
+        </button>
+      </DivModifie>
+    </Section>
+  ) : (
+    <MainSection>
+      <DivInfos>
+        <h2> Mes informations personnelles </h2>
+
+        <div className="row">
+          <div className="container">
+            <h5>Pseudo :</h5>
+            <p> {pseudo} </p>
+          </div>
+
+          <div className="container">
+            <h5>Nom :</h5>
+            <p> {nom} </p>
+          </div>
+
+          <div className="container">
+            <h5>Prénom :</h5>
+            <p> {prenom} </p>
+          </div>
         </div>
-        <p>nom :</p>
-        <div>
-          <p> {nom} </p>
+
+        <div className="row">
+          <div className="container">
+            <h5>Email :</h5>
+            <p> {email} </p>
+          </div>
+
+          <div className="container">
+            <h5>Téléphone :</h5>
+            <p> {telephone} </p>
+          </div>
         </div>
-        <p>Prenom :</p>
-        <div>
-          <p> {prenom} </p>
+
+        <div className="row">
+          <div className="container">
+            <h5>Adresse :</h5>
+            <p> {adresse} </p>
+          </div>
+
+          <div className="container">
+            <h5>Complément d'adresse :</h5>
+            <p> {complement} </p>
+          </div>
         </div>
-        <p>email :</p>
-        <div>
-          <p> {email} </p>
-        </div>
-        <p>Telephne :</p>
-        <div>
-          <p> {telephone} </p>
-        </div>
-        <p>Adresse :</p>
-        <div>
-          <p> {adresse} </p>
-        </div>
-        <p>Complement d'adresse :</p>
-        <div>
-          <p> {complement} </p>
-        </div>
-        <p>Code postal :</p>
-        <div>
-          <p> {codePostal} </p>
-        </div>
-        <p>Ville :</p>
-        <div>
-          <p> {ville} </p>
+        <div className="row">
+          <div className="container">
+            <h5>Code postal :</h5>
+            <p> {codePostal} </p>
+          </div>
+
+          <div className="container">
+            <h5>Ville :</h5>
+            <p> {ville} </p>
+          </div>
         </div>
       </DivInfos>
-      <button onClick={() => put()}> Changer les information du compte </button>
-    </Section>
+      <DivButtonModifie>
+        <h2>Modifier mes informations</h2>
+        <button onClick={() => put()}>
+          {" "}
+          Changer les informations du compte{" "}
+        </button>
+      </DivButtonModifie>
+    </MainSection>
   );
 }

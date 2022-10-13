@@ -13,6 +13,17 @@ const Nav = styled.nav`
     font-size: 1.050rem;
     font-weight: 500;
     position: relative;
+    height: 50%;
+    padding: 0 1rem 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.30rem;
+  }
+
+  a:hover{
+    background-color: ${colors["background-button-deconnexion"]};
+    transition: 0.4s;
   }
 
   button {
@@ -50,12 +61,12 @@ const Nav = styled.nav`
 
   .active::after {
     content: "";
-    width: 100%;
+    width: 80%;
     height: 2px;
     border-radius: 0.25rem;
     background-color: ${colors["font-navbar"]};
     position: absolute;
-    transform: translate(-100% , 27px);
+    transform: translate(-0 , 22px);
 
   }
 `;

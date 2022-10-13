@@ -6,82 +6,93 @@ import { apiurl, colors } from "../../variable/variable";
 // import { colors } from "../../variable/variable";
 
 const MainSection = styled.section`
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 const MainTitle = styled.h1`
-margin-top: 2rem;
+  margin-top: 3%;
 `;
 const Form = styled.form`
-display: flex;
-flex-direction: column;
-
-input {
-  max-width: 350px;
-  height: 30px;
-  font-size: 1rem;
-  border: 1px solid ${colors["border-input"]};
-  background-color: #effbff;
-  color: ${colors["font-input"]};
-  border-radius: 0.25rem;
-}
-input:focus {
-  background-color: #dff7ff;
-  outline:2px solid ${colors["outline-input"]} ;
-  color: ${colors["font-input"]};
-  border-radius: 0.25rem;
-  border: 1px solid ${colors["outline-input"]};
-}
-
-input::placeholder{
-  color: ${colors["font-input"]};
-}
-
-label {
-  margin-top: 20px;
-  font-weight: 500;
-  font-size: 0.9rem;
-}
-
-span {
-  color: #ff0000;
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-h3 {
-  margin-top: 2rem;
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-div {
   display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
+  flex-direction: column;
 
-.enable {
-  background-color: #40c6ff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
+  input {
+    max-width: 350px;
+    height: 30px;
+    font-size: 1rem;
+    border: 1px solid ${colors["border-input"]};
+    background-color: #effbff;
+    color: ${colors["font-input"]};
+    border-radius: 0.25rem;
+  }
+  input:focus {
+    background-color: #dff7ff;
+    outline: 2px solid ${colors["outline-input"]};
+    color: ${colors["font-input"]};
+    border-radius: 0.25rem;
+    border: 1px solid ${colors["outline-input"]};
+  }
 
-.enable:hover {
-  background-color: #00b3ff;
-}
-.disabled{
-  border: none;
-  background-color: #e1e1e1;
-  color: #6b6b6b;
-}
+  input::placeholder {
+    color: ${colors["font-input"]};
+  }
 
-.btn {
-  width: 120px;
-  height: 40px;
-  border-radius: 0.50rem;
-}
+  label {
+    margin-top: 0.8rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  span {
+    color: #ff0000;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  h3 {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .enable {
+    background-color: #40c6ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .enable:hover {
+    background-color: #00b3ff;
+    transition: 0.2s;
+  }
+  .disabled {
+    border: none;
+    background-color: #e1e1e1;
+    color: #6b6b6b;
+  }
+
+  .btn {
+    padding: 10px;
+    border-radius: 0.5rem;
+  }
+
+  .res {
+    margin: 0.5rem;
+    max-width: 350px;
+    text-align: center;
+  }
+
+  .res p {
+    color: red;
+    font-size: 0.8rem;
+  }
 `;
 
 export default function Signup() {
@@ -151,12 +162,8 @@ export default function Signup() {
     axios
       .post(apiurl + "/users/signup", qs.stringify(data))
       .then((res) => {
-        setRes(res.data.message);
         console.log(res.data);
-
-        setTimeout(() => {
-          window.location.assign("/login");
-        }, 1500);
+        window.location.assign("/login");
       })
       .catch((err) => {
         setRes(err.message);
@@ -166,13 +173,16 @@ export default function Signup() {
 
   return (
     <MainSection>
-      <MainTitle>
-        Bienvenue sur la page de création de compte
-      </MainTitle>
+      <MainTitle>Bienvenue sur la page de création de compte</MainTitle>
 
       <Form>
-        <h3>Les champs marqué par <span>*</span> sont obligatoire</h3>
-        <label htmlFor="pseudo"> Pseudo <span>*</span> </label>
+        <h3>
+          Les champs marqué par <span>*</span> sont obligatoire
+        </h3>
+        <label htmlFor="pseudo">
+          {" "}
+          Pseudo <span>*</span>{" "}
+        </label>
         <input
           id="pseudo"
           type="text"
@@ -181,7 +191,15 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
-        <label htmlFor="nom"> Nom <span>*</span> </label>
+        {Res && (
+          <div className="res">
+            <p>Vérifiez que le pseudo fasse entre 4 et 30 caractères</p>
+          </div>
+        )}
+        <label htmlFor="nom">
+          {" "}
+          Nom <span>*</span>{" "}
+        </label>
         <input
           id="nom"
           type="text"
@@ -190,8 +208,16 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
+        {Res && (
+          <div className="res">
+            <p>Vérifiez que le nom fasse entre 2 et 30 caractères</p>
+          </div>
+        )}
 
-        <label htmlFor="prenom"> Prenom <span>*</span> </label>
+        <label htmlFor="prenom">
+          {" "}
+          Prénom <span>*</span>{" "}
+        </label>
         <input
           id="prenom"
           type="text"
@@ -200,8 +226,16 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
+        {Res && (
+          <div className="res">
+            <p>Vérifiez que le prénom fasse entre 2 et 30 caractères</p>
+          </div>
+        )}
 
-        <label htmlFor="email"> Email <span>*</span> </label>
+        <label htmlFor="email">
+          {" "}
+          Email <span>*</span>{" "}
+        </label>
         <input
           id="email"
           type="email"
@@ -210,8 +244,19 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
+        {Res && (
+          <div className="res">
+            <p>
+              Vérifiez que l'email fasse entre 4 et 40 caractères et qu'il ne
+              soit pas déjà utilisé
+            </p>
+          </div>
+        )}
 
-        <label htmlFor="password"> Mot de passe <span>*</span> </label>
+        <label htmlFor="password">
+          {" "}
+          Mot de passe <span>*</span>{" "}
+        </label>
         <input
           id="password"
           type="password"
@@ -220,7 +265,15 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
-        <label htmlFor="telephone"> Telephone <span>*</span> </label>
+        {Res && (
+          <div className="res">
+            <p>Vérifiez que le mot de passe fasse entre 6 et 200 caractères</p>
+          </div>
+        )}
+        <label htmlFor="telephone">
+          {" "}
+          Téléphone <span>*</span>{" "}
+        </label>
         <input
           id="telephone"
           type="number"
@@ -229,7 +282,18 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
-        <label htmlFor="adresse"> Adresse <span>*</span> </label>
+        {Res && (
+          <div className="res">
+            <p>
+              Vérifiez que le téléphone fasse 10 chiffres et qu'il ne soit
+              pas déjà utilisé
+            </p>
+          </div>
+        )}
+        <label htmlFor="adresse">
+          {" "}
+          Adresse <span>*</span>{" "}
+        </label>
         <input
           id="adresse"
           type="text"
@@ -238,7 +302,12 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
-        <label htmlFor="complement"> Complement d'adresse:</label>
+        {Res && (
+          <div className="res">
+            <p>Vérifiez que le l'adresse fasse entre 4 et 60 caractères</p>
+          </div>
+        )}
+        <label htmlFor="complement"> Complément d'adresse:</label>
         <input
           id="complement"
           type="text"
@@ -247,7 +316,18 @@ export default function Signup() {
           required={false}
           onChange={() => checkValues()}
         />
-        <label htmlFor="codepostal"> Code postal <span>*</span> </label>
+        {Res && (
+          <div className="res">
+            <p>
+              Vérifiez que le complément d'adresse fasse entre 4 et 60
+              caractères
+            </p>
+          </div>
+        )}
+        <label htmlFor="codepostal">
+          {" "}
+          Code postal <span>*</span>{" "}
+        </label>
         <input
           id="codepostal"
           type="number"
@@ -256,8 +336,16 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
+        {Res && (
+          <div className="res">
+            <p>Vérifiez que le code postal fasse 5 chiffres</p>
+          </div>
+        )}
 
-        <label htmlFor="ville"> Ville <span>*</span> </label>
+        <label htmlFor="ville">
+          {" "}
+          Ville <span>*</span>{" "}
+        </label>
         <input
           id="ville"
           type="text"
@@ -266,19 +354,21 @@ export default function Signup() {
           required={true}
           onChange={() => checkValues()}
         />
+        {Res && (
+          <div className="res">
+            <p>Vérifiez que la ville fasse entre 2 et 50 caractères</p>
+          </div>
+        )}
 
         <div>
-          <button disabled={!Filled} className={!Filled ? "disabled btn" : "enable btn"} onClick={(e) => send(e)}>
+          <button
+            disabled={!Filled}
+            className={!Filled ? "disabled btn" : "enable btn"}
+            onClick={(e) => send(e)}
+          >
             Créer le compte
           </button>
         </div>
-
-        {Res && (
-          <div className="res">
-            <p>Erreur</p>
-            <p>Vérifier bien que :</p>
-          </div>
-        )}
       </Form>
     </MainSection>
   );
