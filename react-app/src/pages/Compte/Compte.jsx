@@ -11,22 +11,21 @@ const MainSection = styled.section`
   align-items: center;
 
   h2 {
-    margin-top: 5%;
+    margin-top: 3%;
     text-align: center;
   }
 `;
 const DivInfos = styled.div`
-  margin-top: 2%;
-  width: 90%;
 
-  .row {
+  .collumn {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
   }
 
   .container {
     background-color: #e4f3ff;
-    width: 100%;
+    width: 300px;
     border-radius: 0.3rem;
     margin: 1rem;
     box-shadow: rgba(0, 153, 255, 0.2) 0px 2px 8px 0px;
@@ -86,6 +85,7 @@ const DivModifie = styled.div`
       border: none;
       border-radius: 0.5rem;
       cursor: pointer;
+      width: 200px;
     }
 
     button:hover {
@@ -94,12 +94,13 @@ const DivModifie = styled.div`
     }
     div {
       display: flex;
-      justify-content: center;
+      align-items: center;
+      flex-direction: column;
     }
   }
 
   input {
-    max-width: 350px;
+    width: 350px;
     height: 30px;
     font-size: 1rem;
     border: 1px solid ${colors["border-input"]};
@@ -193,11 +194,11 @@ export default function Compte() {
     }
 
     const data = {
-      email: email.value,
-      adresse: adresse.value,
-      complement: complement.value,
-      codepostal: codePostal.value,
-      ville: ville.value,
+      email: email.value || userJson.email,
+      adresse: adresse.value || userJson.adresse,
+      complement: complement.value || userJson.complement,
+      codepostal: codePostal.value || userJson.codepostal,
+      ville: ville.value || userJson.ville,
     };
 
     const config = {
@@ -302,15 +303,15 @@ export default function Compte() {
           />
           <div>
             <button onClick={(e) => modifie(e)}> modifier mon compte </button>
+            <button className="btn-back" onClick={() => NoPut()}>
+              {" "}
+              Annuler les modifications{" "}
+            </button>
+            <button className="btn-delete" onClick={() => delet()}>
+              Supprimer mon compte
+            </button>
           </div>
         </form>
-        <button className="btn-back" onClick={() => NoPut()}>
-          {" "}
-          Annuler les modifications{" "}
-        </button>
-        <button className="btn-delete" onClick={() => delet()}>
-          Supprimer mon compte
-        </button>
       </DivModifie>
     </Section>
   ) : (
@@ -318,7 +319,7 @@ export default function Compte() {
       <DivInfos>
         <h2> Mes informations personnelles </h2>
 
-        <div className="row">
+        <div className="collumn">
           <div className="container">
             <h5>Pseudo :</h5>
             <p> {pseudo} </p>
@@ -333,9 +334,7 @@ export default function Compte() {
             <h5>Prénom :</h5>
             <p> {prenom} </p>
           </div>
-        </div>
 
-        <div className="row">
           <div className="container">
             <h5>Email :</h5>
             <p> {email} </p>
@@ -345,20 +344,17 @@ export default function Compte() {
             <h5>Téléphone :</h5>
             <p> {telephone} </p>
           </div>
-        </div>
 
-        <div className="row">
           <div className="container">
             <h5>Adresse :</h5>
             <p> {adresse} </p>
           </div>
 
+
           <div className="container">
             <h5>Complément d'adresse :</h5>
             <p> {complement} </p>
           </div>
-        </div>
-        <div className="row">
           <div className="container">
             <h5>Code postal :</h5>
             <p> {codePostal} </p>
