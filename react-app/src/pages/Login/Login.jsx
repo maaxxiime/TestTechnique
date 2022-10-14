@@ -12,6 +12,12 @@ const MainSection = styled.section`
 `;
 const MainTitle = styled.h1`
   margin-top: 3%;
+  @media screen and (max-width: 480px) {
+      font-size: 1rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 1.2rem;
+    }
 `;
 const Form = styled.form`
   display: flex;
@@ -25,6 +31,12 @@ const Form = styled.form`
     background-color: #effbff;
     color: ${colors["font-input"]};
     border-radius: 0.25rem;
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
   input:focus {
     background-color: #dff7ff;
@@ -32,27 +44,57 @@ const Form = styled.form`
     color: ${colors["font-input"]};
     border-radius: 0.25rem;
     border: 1px solid ${colors["outline-input"]};
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
 
   input::placeholder {
     color: ${colors["font-input"]};
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
 
   label {
     margin-top: 20px;
     font-weight: 500;
     font-size: 0.9rem;
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
 
   span {
     color: #ff0000;
     font-size: 1.2rem;
     font-weight: 500;
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
   h3 {
     margin-top: 2rem;
     font-size: 1.1rem;
     font-weight: 500;
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
 
   div {
@@ -81,6 +123,12 @@ const Form = styled.form`
   .btn {
     padding: 10px;
     border-radius: 0.5rem;
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
 
   .res p {
@@ -153,9 +201,7 @@ export default function Login() {
   }
   return (
     <MainSection id="main">
-      <MainTitle>
-        <p> Connectez-vous pour profiter du site</p>
-      </MainTitle>
+      <MainTitle>Connectez-vous pour profiter du site</MainTitle>
 
       <Form>
         <h3>

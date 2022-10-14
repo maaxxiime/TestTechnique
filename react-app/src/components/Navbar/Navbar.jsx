@@ -10,7 +10,7 @@ const Nav = styled.nav`
   a {
     text-decoration: none;
     color: ${colors["font-navbar"]};
-    font-size: 1.050rem;
+    font-size: 1.05rem;
     font-weight: 500;
     position: relative;
     height: 50%;
@@ -18,10 +18,20 @@ const Nav = styled.nav`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.30rem;
+    border-radius: 0.3rem;
+
+    @media screen and (max-width: 480px) {
+      font-size: 0.8rem;
+      padding: 0 0.2rem 0 0.2rem;
+      text-align: center;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.9rem;
+      padding: 0 0.5rem 0 0.5rem;
+    }
   }
 
-  a:hover{
+  a:hover {
     background-color: ${colors["background-button-deconnexion"]};
     transition: 0.4s;
   }
@@ -31,16 +41,31 @@ const Nav = styled.nav`
     background-color: ${colors["background-button-deconnexion"]};
     cursor: pointer;
     color: ${colors["font-navbar"]};
-    font-size: 1.050rem;
+    font-size: 1.05rem;
     font-weight: 500;
     position: relative;
     height: 3rem;
     border-radius: 0.5rem;
-    
+
+    @media screen and (max-width: 480px) {
+      font-size: 0.8rem;
+      padding: 0 0.1rem 0 0.1rem;
+      margin: 0 0 0 7px;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.9rem;
+      padding: 0 0.5rem 0 0.5rem;
+    }
   }
   h2 {
     color: ${colors["font-navbar"]};
     font-size: 2rem;
+    @media screen and (max-width: 480px) {
+      font-size: 1rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 1.3rem;
+    }
   }
 
   div {
@@ -58,7 +83,6 @@ const Nav = styled.nav`
     margin: 0 3% 0 2%;
   }
 
-
   .active::after {
     content: "";
     width: 80%;
@@ -66,8 +90,7 @@ const Nav = styled.nav`
     border-radius: 0.25rem;
     background-color: ${colors["font-navbar"]};
     position: absolute;
-    transform: translate(-0 , 22px);
-
+    transform: translate(-0, 22px);
   }
 `;
 
@@ -79,36 +102,66 @@ export default function Navbar() {
   let urlReplace = url.replace(/\/$/, "");
   let trueUrl = urlReplace.substring(urlReplace.lastIndexOf("/") + 1);
 
-
-
-
-
   function deconnexion() {
     window.localStorage.clear();
     window.location.assign("/");
   }
 
-
   return userJson ? (
     <Nav>
       <div>
-      <h2>Deadline BTP</h2>
-      <a id="accueil" className={trueUrl === "localhost:3000" ? "active" : ""} href="/"> Accueil</a>
+        <h2>Deadline BTP</h2>
+        <a
+          id="accueil"
+          className={trueUrl === "localhost:3000" ? "active" : ""}
+          href="/"
+        >
+          {" "}
+          Accueil
+        </a>
       </div>
       <div>
-      <a id="compte" className={trueUrl === "compte" ? "active" : ""} href="/compte"> Mon compte</a>
-      <button onClick={() => deconnexion()}>🔓 Déconnexion</button>
+        <a
+          id="compte"
+          className={trueUrl === "compte" ? "active" : ""}
+          href="/compte"
+        >
+          {" "}
+          Mon compte
+        </a>
+        <button onClick={() => deconnexion()}>🔓 Déconnexion</button>
       </div>
     </Nav>
   ) : (
     <Nav>
       <div>
-      <h2>Deadline BTP</h2>
-      <a id="accueilTwo" className={trueUrl === "localhost:3000" ? "active" : ""} href="/"> Accueil</a>
+        <h2>Deadline BTP</h2>
+        <a
+          id="accueilTwo"
+          className={trueUrl === "localhost:3000" ? "active" : ""}
+          href="/"
+        >
+          {" "}
+          Accueil
+        </a>
       </div>
       <div>
-      <a id="login" className={trueUrl === "login" ? "active" : ""} href="/login"> Connexion</a>
-      <a id="signup" className={trueUrl === "signup" ? "active" : ""} href="/signup"> Créer un compte</a>
+        <a
+          id="login"
+          className={trueUrl === "login" ? "active" : ""}
+          href="/login"
+        >
+          {" "}
+          Connexion
+        </a>
+        <a
+          id="signup"
+          className={trueUrl === "signup" ? "active" : ""}
+          href="/signup"
+        >
+          {" "}
+          Créer un compte
+        </a>
       </div>
     </Nav>
   );

@@ -13,10 +13,15 @@ const MainSection = styled.section`
   h2 {
     margin-top: 3%;
     text-align: center;
+    @media screen and (max-width: 480px) {
+      font-size: 1.1rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 1.3rem;
+    }
   }
 `;
 const DivInfos = styled.div`
-
   .collumn {
     display: flex;
     flex-direction: column;
@@ -34,9 +39,23 @@ const DivInfos = styled.div`
   }
   .container h5 {
     margin: 6px 0;
+    font-size: 1rem;
+
+    @media screen and (max-width: 480px) {
+      font-size: 0.8rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.9rem;
+    }
   }
 
   .container p {
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
 `;
 
@@ -54,6 +73,12 @@ const DivButtonModifie = styled.div`
     height: 40px;
     border-radius: 0.5rem;
     cursor: pointer;
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
 
   button:hover {
@@ -66,17 +91,13 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  h2 {
-    margin-top: 3%;
-  }
 `;
 
 const DivModifie = styled.div`
   form {
     display: flex;
     flex-direction: column;
-
+    margin-top: 3%;
     button {
       margin-top: 6%;
       background-color: #3cff00;
@@ -86,6 +107,12 @@ const DivModifie = styled.div`
       border-radius: 0.5rem;
       cursor: pointer;
       width: 200px;
+      @media screen and (max-width: 480px) {
+        font-size: 0.8rem;
+      }
+      @media screen and (min-width: 480px) and (max-width: 720px) {
+        font-size: 0.9rem;
+      }
     }
 
     button:hover {
@@ -100,7 +127,7 @@ const DivModifie = styled.div`
   }
 
   input {
-    width: 350px;
+    width: 320px;
     height: 30px;
     font-size: 1rem;
     border: 1px solid ${colors["border-input"]};
@@ -114,16 +141,35 @@ const DivModifie = styled.div`
     color: ${colors["font-input"]};
     border-radius: 0.25rem;
     border: 1px solid ${colors["outline-input"]};
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
 
   input::placeholder {
     color: ${colors["font-input"]};
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
 
   label {
     margin-top: 0.8rem;
     font-weight: 500;
     font-size: 0.9rem;
+
+    @media screen and (max-width: 480px) {
+      font-size: 0.7rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 720px) {
+      font-size: 0.8rem;
+    }
   }
 
   .btn-delete {
@@ -256,8 +302,6 @@ export default function Compte() {
 
   return Put ? (
     <Section>
-      <h2> Modifier mon compte </h2>
-
       <DivModifie>
         <form>
           <label htmlFor="email"> Email : </label>
@@ -350,7 +394,6 @@ export default function Compte() {
             <p> {adresse} </p>
           </div>
 
-
           <div className="container">
             <h5>Complément d'adresse :</h5>
             <p> {complement} </p>
@@ -367,7 +410,6 @@ export default function Compte() {
         </div>
       </DivInfos>
       <DivButtonModifie>
-        <h2>Modifier mes informations</h2>
         <button onClick={() => put()}>
           {" "}
           Changer les informations du compte{" "}
