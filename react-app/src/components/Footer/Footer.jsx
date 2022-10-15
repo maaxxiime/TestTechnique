@@ -10,10 +10,10 @@ import pinterest from "../../assets/img/pinterest.png";
 
 const Foot = styled.footer`
   display: flex;
-  background-color: ${colors["background-navbar"]};
+  background-color: ${colors["blue-one"]};
   margin-top: 2%;
   height: 140px;
-  color: white;
+  color: ${colors["font-white"]};
   align-items: center;
   flex-direction: column;
 

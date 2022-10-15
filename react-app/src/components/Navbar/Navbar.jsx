@@ -4,12 +4,12 @@ import { colors } from "../../variable/variable";
 
 const Nav = styled.nav`
   display: flex;
-  background-color: ${colors["background-navbar"]};
+  background-color: ${colors["blue-one"]};
   height: 80px;
 
   a {
     text-decoration: none;
-    color: ${colors["font-navbar"]};
+    color: ${colors["font-white"]};
     font-size: 1.05rem;
     font-weight: 500;
     position: relative;
@@ -32,15 +32,15 @@ const Nav = styled.nav`
   }
 
   a:hover {
-    background-color: ${colors["background-button-deconnexion"]};
+    background-color: ${colors["blue-two"]};
     transition: 0.4s;
   }
 
   button {
     border: none;
-    background-color: ${colors["background-button-deconnexion"]};
+    background-color: ${colors["blue-two"]};
     cursor: pointer;
-    color: ${colors["font-navbar"]};
+    color: ${colors["font-white"]};
     font-size: 1.05rem;
     font-weight: 500;
     position: relative;
@@ -58,7 +58,7 @@ const Nav = styled.nav`
     }
   }
   h2 {
-    color: ${colors["font-navbar"]};
+    color: ${colors["font-white"]};
     font-size: 2rem;
     @media screen and (max-width: 480px) {
       font-size: 1rem;
@@ -88,7 +88,7 @@ const Nav = styled.nav`
     width: 80%;
     height: 2px;
     border-radius: 0.25rem;
-    background-color: ${colors["font-navbar"]};
+    background-color: ${colors["font-white"]};
     position: absolute;
     transform: translate(-0, 22px);
   }

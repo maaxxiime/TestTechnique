@@ -28,7 +28,7 @@ const Form = styled.form`
     height: 30px;
     font-size: 1rem;
     border: 1px solid ${colors["border-input"]};
-    background-color: #effbff;
+    background-color: ${colors["background-input"]};
     color: ${colors["font-input"]};
     border-radius: 0.25rem;
     @media screen and (max-width: 480px) {
@@ -39,7 +39,7 @@ const Form = styled.form`
     }
   }
   input:focus {
-    background-color: #dff7ff;
+    background-color: ${colors["background-input-focus"]};
     outline: 2px solid ${colors["outline-input"]};
     color: ${colors["font-input"]};
     border-radius: 0.25rem;
@@ -104,14 +104,14 @@ const Form = styled.form`
   }
 
   .enable {
-    background-color: #40c6ff;
-    color: white;
+    background-color: ${colors["blue-btn"]};
+    color: ${colors["font-white"]};
     border: none;
     cursor: pointer;
   }
 
   .enable:hover {
-    background-color: #00b3ff;
+    background-color: ${colors["blue-btn-hover"]};
     transition: 0.2s;
   }
   .disabled {

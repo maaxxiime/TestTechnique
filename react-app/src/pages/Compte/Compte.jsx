@@ -66,8 +66,8 @@ const DivButtonModifie = styled.div`
 
   button {
     margin-top: 3%;
-    background-color: #40c6ff;
-    color: white;
+    background-color: ${colors["blue-btn"]};
+    color: ${colors["font-white"]};
     border: none;
     width: 150px;
     height: 40px;
@@ -82,7 +82,7 @@ const DivButtonModifie = styled.div`
   }
 
   button:hover {
-    background-color: #00b3ff;
+    background-color: ${colors["blue-btn-hover"]};
     transition: 0.2s;
   }
 `;
@@ -101,7 +101,7 @@ const DivModifie = styled.div`
     button {
       margin-top: 6%;
       background-color: #3cff00;
-      color: white;
+      color: ${colors["font-white"]};
       padding: 10px;
       border: none;
       border-radius: 0.5rem;
@@ -131,12 +131,12 @@ const DivModifie = styled.div`
     height: 30px;
     font-size: 1rem;
     border: 1px solid ${colors["border-input"]};
-    background-color: #effbff;
+    background-color: ${colors["background-input"]};
     color: ${colors["font-input"]};
     border-radius: 0.25rem;
   }
   input:focus {
-    background-color: #dff7ff;
+    background-color: ${colors["background-input-focus"]};
     outline: 2px solid ${colors["outline-input"]};
     color: ${colors["font-input"]};
     border-radius: 0.25rem;
@@ -175,7 +175,7 @@ const DivModifie = styled.div`
   .btn-delete {
     margin-top: 6%;
     background-color: #ff0000;
-    color: white;
+    color: ${colors["font-white"]};
     padding: 10px;
     border: none;
     border-radius: 0.5rem;
@@ -184,7 +184,7 @@ const DivModifie = styled.div`
   .btn-back {
     margin-top: 6%;
     background-color: #40c6ff;
-    color: white;
+    color: ${colors["font-white"]};
     padding: 10px;
     border: none;
     border-radius: 0.5rem;
