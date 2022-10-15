@@ -3,7 +3,6 @@ import styled from "styled-components";
 import axios from "axios";
 import qs from "qs";
 import { apiurl, colors } from "../../variable/variable";
-// import { colors } from "../../variable/variable";
 
 const MainSection = styled.section`
   display: flex;
@@ -210,7 +209,6 @@ export default function Signup() {
     axios
       .post(apiurl + "/users/signup", qs.stringify(data))
       .then((res) => {
-        console.log(res.data);
         window.location.assign("/login");
       })
       .catch((err) => {

@@ -201,7 +201,9 @@ const DivModifie = styled.div`
 `;
 
 export default function Compte() {
+  //récupère "user" dans le local storage qui est créé puis stocker lors de la création
   const user = window.localStorage.getItem("user");
+  //transforme en objet javascript
   const userJson = JSON.parse(user);
 
   const userToken = userJson.token;
@@ -240,6 +242,7 @@ export default function Compte() {
     }
 
     const data = {
+      // récupère la value des input si il y en a une, sinon garde la valeur qui était la de base
       email: email.value || userJson.email,
       adresse: adresse.value || userJson.adresse,
       complement: complement.value || userJson.complement,
@@ -273,7 +276,6 @@ export default function Compte() {
         };
         window.localStorage.setItem("user", JSON.stringify(user));
         window.location.assign("/compte");
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -288,12 +290,10 @@ export default function Compte() {
 
     axios
       // envoi l'userId et le usertoken pour pouvoir comparer l'id du token et l'userId
-
       .delete(apiurl + "/users/" + userId, config)
       .then((res) => {
         localStorage.clear();
         window.location.assign("/");
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);

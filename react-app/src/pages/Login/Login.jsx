@@ -139,20 +139,9 @@ const Form = styled.form`
 export default function Login() {
   const [Filled, setFilled] = useState(false);
   const [Res, setRes] = useState(undefined);
-  const [Log, setLog] = useState(false);
 
-  // si user est deja connecté, alors affiche une page pour lui dire qu'il est deja connecté
-  useEffect(() => {
-    function checkLogin() {
-      const user = window.localStorage.getItem("user");
-      if (user) {
-        setLog(true);
-      }
-    }
-    checkLogin();
-  }, [Log]);
 
-  // si champ vide, desactive le bouton de connexion, sinon ça l'active
+  // si champ vide, désactive le bouton de connexion, sinon ça l'active
   function checkValues() {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
@@ -191,7 +180,7 @@ export default function Login() {
           userId: res.data.userId,
           token: res.data.token,
         };
-        // assign la variable dans le local storage sous la clé "user"
+        // assign la constante "user" dans le local storage sous la clé "user"
         window.localStorage.setItem("user", JSON.stringify(user));
         window.location.assign("/compte");
       })

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { colors } from "../../variable/variable";
 
@@ -113,6 +113,7 @@ export default function Navbar() {
         <h2>Deadline BTP</h2>
         <a
           id="accueil"
+          // Si l'url est "localhost:3000" ça ajoute la classe active sinon ça ne met rien 
           className={trueUrl === "localhost:3000" ? "active" : ""}
           href="/"
         >
