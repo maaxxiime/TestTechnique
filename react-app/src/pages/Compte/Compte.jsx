@@ -70,7 +70,7 @@ const DivButtonModifie = styled.div`
     color: ${colors["font-white"]};
     border: none;
     width: 150px;
-    height: 40px;
+    height: fit-content;
     border-radius: 0.5rem;
     cursor: pointer;
     @media screen and (max-width: 480px) {
